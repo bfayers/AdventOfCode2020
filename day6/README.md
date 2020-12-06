@@ -27,4 +27,5 @@ part2Output
 
 real    0m0.007s
 user    0m0.000s
-sys     0m0.000s```
+sys     0m0.000s
+```
