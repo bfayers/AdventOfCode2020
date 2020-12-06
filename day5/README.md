@@ -13,7 +13,8 @@ part2Output
 
 real    0m0.532s
 user    0m0.109s
-sys     0m0.484s```
+sys     0m0.484s
+```
 
 `time` when using compiled version
 
