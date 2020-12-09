@@ -21,8 +21,8 @@ Since this was pretty slow I changed my solution to instead of converting string
 $ go build
 
 $ time ./day9
-Incorrect value: 26796446
-Weakness: 3353494
+Incorrect value: part1Output
+Weakness: part2Output
 
 real    0m0.140s
 user    0m0.141s
