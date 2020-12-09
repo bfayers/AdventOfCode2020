@@ -9,17 +9,18 @@ import (
 )
 
 //Stolen - https://stackoverflow.com/a/18479916
-func readLines(path string) ([]string, error) {
+func readLines(path string) ([]int, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
 
-	var lines []string
+	var lines []int
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
+		val, _ := strconv.Atoi(strings.TrimSpace(scanner.Text()))
+		lines = append(lines, val)
 	}
 	return lines, scanner.Err()
 }
@@ -71,16 +72,16 @@ func main() {
 	//Part 1 - checks every number (after the preamble) to ensure that it is valid.
 	for i, num := range input[25:] {
 		adjustedIndex := i + 25
-		value, _ := strconv.Atoi(strings.TrimSpace(num))
+		//value, _ := strconv.Atoi(strings.TrimSpace(num))
 		//Get last 25 numbers
 		lastTwentyFive := input[adjustedIndex-25:]
 		//Check if two of the last five can sum to current
 		found := false
 		for _, lNum := range lastTwentyFive {
-			num1, _ := strconv.Atoi(strings.TrimSpace(lNum))
+			//num1, _ := strconv.Atoi(strings.TrimSpace(lNum))
 			for _, l2Num := range lastTwentyFive {
-				num2, _ := strconv.Atoi(strings.TrimSpace(l2Num))
-				if (num1 + num2) == value {
+				//num2, _ := strconv.Atoi(strings.TrimSpace(l2Num))
+				if (lNum + l2Num) == num {
 					found = true
 					break
 				}
@@ -89,8 +90,8 @@ func main() {
 		if found {
 			continue
 		} else {
-			wrongValue = value
-			fmt.Println("Incorrect value: " + strconv.Itoa(value))
+			wrongValue = num
+			fmt.Println("Incorrect value: " + strconv.Itoa(num))
 			break
 		}
 	}
@@ -98,14 +99,12 @@ func main() {
 	//Part 2 - find >2 contiguous numbers that add to wrongValue
 	for i, numm := range input {
 		var numsUsed []int
-		num, _ := strconv.Atoi(strings.TrimSpace(numm))
-		total, _ := strconv.Atoi(strings.TrimSpace(numm))
+		total := numm
 		for _, numm2 := range input[i+1:] {
-			num2, _ := strconv.Atoi(strings.TrimSpace(numm2))
 			//Add numbers we're using to array for storage
-			numsUsed = append(numsUsed, num)
-			numsUsed = append(numsUsed, num2)
-			total += num2
+			numsUsed = append(numsUsed, numm)
+			numsUsed = append(numsUsed, numm2)
+			total += numm2
 			if total == wrongValue {
 				//Add smallest and largest numbers used
 				smallest, biggest := minMax(numsUsed)
