@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func Find(slice []int, val int) (int, bool) {
+func find(slice []int, val int) (int, bool) {
 	for i, item := range slice {
 		if item == val {
 			return i, true
@@ -40,7 +40,7 @@ func runBootCode(bootCode []string) (int, int) {
 	for i < len(bootCode) {
 		//Check if instruction has run before
 		//fmt.Println(i)
-		_, found := Find(alreadyRun, i)
+		_, found := find(alreadyRun, i)
 		if found {
 			//Already ran this instruction
 			return i, accumulator
@@ -89,7 +89,7 @@ func main() {
 	for i < len(bootCode) {
 		//Check if instruction has run before
 		//fmt.Println(i)
-		_, found := Find(alreadyRun, i)
+		_, found := find(alreadyRun, i)
 		if found {
 			//Already ran this instruction - print accumulator
 			fmt.Println(accumulator)
